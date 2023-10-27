@@ -1,0 +1,19 @@
+{
+  "author": "Milton Rosas (backend part only)",
+  "name": "soft-jobs",
+  "version": "2.0.0",
+  "description": "Proyecto Global Desafio Soft Jobs",
+  "engines": {
+    "node": "18.16.0"
+  },
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "npm run dev --prefix ./frontend",
+    "dev:backend": "npm run dev --prefix ./backend",
+    "prepare": "npm run prepare:frontend",
+    "prepare:frontend": "npm i --prefix ./frontend",
+    "prepare:backend": "npm i --prefix ./backend"
+  },
+  "keywords": [],
+  "license": "MIT"
+}
