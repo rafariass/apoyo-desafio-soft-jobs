@@ -1,15 +1,34 @@
-const HTTP_STATUS = require('../../config/constants')
-const sqlRequest = require('../models/Users.dao')
-const { jwtSign } = require('../../utils/jwt')
+const daoSQL = require('../models/Users.dao')
+const { jwtVerify } = require('../../utils/jwt')
 
-const login = (req, res) => {
-  sqlRequest.verifyCredentials(req.body.email, req.body.password)
+const findUsers = (req, res) => {
+  daoSQL.findUsers()
     .then((user) => {
       user.length > 0
-        ? res.status(200).json({ token: jwtSign({ email: req.body.email }) })
-        : res.status(404).json({ code: HTTP_STATUS.not_found.code, message: HTTP_STATUS.not_found.text })
+        ? res.status(200).json(user)
+        : res.status(404).json({ code: '404', message: 'findUsers: user not found :(' })
     })
     .catch((error) => res.status(500).json(error))
 }
 
-module.exports = { login }
+const findSingleUser = (req, res) => {
+  const decoded = jwtVerify(req
+    .headers
+    .authorization
+    .split(' ')
+    .slice(1)[0]
+  )
+
+  daoSQL.findSingleUser(decoded.email)
+    .then((user) => {
+      user.length > 0
+        ? res.status(200).json(user)
+        : res.status(404).json({ code: '404', message: 'findSingleUser: user not found :(' })
+    })
+    .catch((error) => res.status(500).json(error))
+}
+
+module.exports = {
+  findUsers,
+  findSingleUser
+}
