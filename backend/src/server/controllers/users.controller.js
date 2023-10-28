@@ -1,7 +1,7 @@
 const daoSQL = require('../models/Users.dao')
 const { jwtVerify } = require('../../utils/jwt')
 
-const findUsers = (req, res) => {
+const findUsers = (_, res) => {
   daoSQL.findUsers()
     .then((user) => {
       user.length > 0
@@ -11,7 +11,7 @@ const findUsers = (req, res) => {
     .catch((error) => res.status(500).json(error))
 }
 
-const findSingleUser = (req, res) => {
+const findSingleUserRequest = (req, res) => {
   const decoded = jwtVerify(req
     .headers
     .authorization
@@ -19,16 +19,16 @@ const findSingleUser = (req, res) => {
     .slice(1)[0]
   )
 
-  daoSQL.findSingleUser(decoded.email)
+  daoSQL.findSingleUserFromDB(decoded.email)
     .then((user) => {
       user.length > 0
         ? res.status(200).json(user)
-        : res.status(404).json({ code: '404', message: 'findSingleUser: user not found :(' })
+        : res.status(404).json({ code: '404', message: 'findSingleUserRequest: user not found :(' })
     })
     .catch((error) => res.status(500).json(error))
 }
 
 module.exports = {
   findUsers,
-  findSingleUser
+  findSingleUserRequest
 }

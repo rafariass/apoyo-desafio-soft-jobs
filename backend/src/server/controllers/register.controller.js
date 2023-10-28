@@ -1,7 +1,7 @@
 const daoSQL = require('../models/Users.dao')
 
-const saveUser = (req, res) => {
-  daoSQL.saveUserRequest(req.body)
+const saveUserRequest = (req, res) => {
+  daoSQL.saveUserToDB(req.body)
     .then((user) => {
       user.length > 0
         ? res.status(200).json(user)
@@ -10,4 +10,4 @@ const saveUser = (req, res) => {
     .catch((error) => res.status(500).json(error))
 }
 
-module.exports = { saveUser }
+module.exports = { saveUserRequest }
