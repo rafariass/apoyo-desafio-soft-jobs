@@ -9,9 +9,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use(routes.login)
+// app.use(routes.login)
 app.use(routes.users)
-app.use(routes.register)
+// app.use(routes.register)
 // app.use(routes.errors)
 
 app.all('*', (_, res) => res.status(404).json({ code: 404, message: '\'Page Not Found from backend :(\'' }))
