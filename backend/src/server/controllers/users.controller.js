@@ -19,7 +19,8 @@ const findSingleUserRequest = (req, res) => {
             {
               code: HTTP_STATUS.not_found.code,
               message: HTTP_STATUS.not_found.text
-            })
+            }
+          )
     })
     .catch((error) => res.status(500).json(error))
 }
@@ -37,7 +38,8 @@ const authenticationRequest = (req, res) => {
             {
               code: HTTP_STATUS.not_found.code,
               message: HTTP_STATUS.not_found.text
-            })
+            }
+          )
     })
     .catch((error) => res.status(HTTP_STATUS.internal_server_error.code).json(error))
 }
@@ -53,7 +55,8 @@ const saveUserRequest = (req, res) => {
             {
               code: HTTP_STATUS.internal_server_error.code,
               message: HTTP_STATUS.internal_server_error.text
-            })
+            }
+          )
     })
     .catch((error) => res.status(HTTP_STATUS.internal_server_error.code).json(error))
 }
