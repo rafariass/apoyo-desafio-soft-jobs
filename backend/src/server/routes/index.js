@@ -1,11 +1,9 @@
-const login = require('./login.route')
+// const login = require('./login.route')
 const users = require('./users.route')
-const register = require('./register.route')
+// const register = require('./register.route')
 const errors = require('./errors.route')
 
 module.exports = {
-  login,
   users,
-  register,
   errors
 }

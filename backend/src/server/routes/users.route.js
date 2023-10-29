@@ -5,4 +5,8 @@ const { verifyToken } = require('../middlewares/verification.middleware')
 
 router.get('/usuarios', verifyToken, users.findSingleUserRequest)
 
+router.post('/login', users.authenticationRequest)
+
+router.post('/usuarios', users.saveUserRequest)
+
 module.exports = router

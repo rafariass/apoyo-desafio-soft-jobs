@@ -12,8 +12,13 @@ const saveUserToDB = async ({ email, password, rol, lenguage }) => {
   return await execQuery(query, values)
 }
 
+const verifyCredentials = async (email, password) => {
+  return await execQuery('SELECT * FROM usuarios WHERE email = $1 and password = $2;', [email, password])
+}
+
 module.exports = {
   findUsers,
   findSingleUserFromDB,
-  saveUserToDB
+  saveUserToDB,
+  verifyCredentials
 }
