@@ -14,8 +14,7 @@ const saveUserToDB = async ({ email, password, rol, lenguage }) => {
 const passCompare = async (email, password) => {
   const encrypt = await findSingleUserFromDB(email)
   if (encrypt.length < 1) return []
-  const isCorrect = bcrypt.compareSync(password, encrypt[0].password)
-  return isCorrect
+  return bcrypt.compareSync(password, encrypt[0].password)
 }
 
 const generateHash = async (password) => await bcrypt.hashSync(password, HASHSALTSYNC, null)
